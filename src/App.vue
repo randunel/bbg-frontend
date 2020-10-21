@@ -5,13 +5,13 @@
     </div>
     <h3>Server side prerequisites</h3>
     <AuthInstructions v-on:job-initialised="onJobInitialised"/>
-    <hr class="section-divider">
-    <div class="img-wrapper">
+    <hr v-if="jobId" class="section-divider">
+    <div v-if="jobId" class="img-wrapper">
         <img alt="Browser image" src="https://cdn.onlinewebfonts.com/svg/img_81535.png"/>
     </div>
-    <h3>Frontend</h3>
-    <Postcode v-if="job"/>
-    <hr>
+    <h3 v-if="jobId">Frontend</h3>
+    <Postcode v-if="jobId"/>
+    <hr v-if="jobId">
 </template>
 
 <script>
@@ -26,12 +26,14 @@ export default {
     },
     data() {
         return {
-            job: null
+            jobId: '',
+            auth: ''
         };
     },
     methods: {
-        onJobInitialised(job) {
-            this.job = job;
+        onJobInitialised(job, auth) {
+            this.jobId = job._jobId;
+            this.auth = auth;
         }
     }
 }

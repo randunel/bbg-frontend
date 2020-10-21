@@ -59,9 +59,10 @@ export default {
             this.error = false;
             event.preventDefault();
             let job;
+            const auth = this.token;
             try {
                 job = await shared.getJob({
-                    auth: this.token,
+                    auth,
                     id: this.jobId
                 });
             } catch(err) {
@@ -75,7 +76,7 @@ export default {
                 this.token = '';
                 return;
             }
-            this.$emit('job-initialised', job);
+            this.$emit('job-initialised', job, auth);
         },
         onChangeHandler() {
             localStorage.setItem('jobId', this.jobId);
