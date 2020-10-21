@@ -13,14 +13,16 @@ import shared from '../shared';
 
 export default {
     name: 'Postcode',
+    props: [ 'job' ],
     data() {
         return {
             postcode: ''
         };
     },
     methods: {
-        async submit() {
-            console.log(this.postcode, await shared.getJob({}))
+        async submit(event) {
+            event.preventDefault();
+            await this.job.submitInput('postcode', this.postcode);
         }
     }
 }

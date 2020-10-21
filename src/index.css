@@ -7,6 +7,14 @@
     margin-top: 60px;
 }
 
+.inactive {
+    color: rgba(222,222,222,1);
+}
+
+input, button {
+    color: inherit;
+}
+
 ol {
     text-align: start;
 }
