@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && rm -r docs && cp -r dist docs && sed -i 's/=\"\\//=\".\\//' docs/index.html"
+    "build": "vite build && rm -r docs && cp -r dist docs && sed -i 's/=\"\\//=\".\\//' docs/index.html && touch docs/.nojekyll"
   },
   "dependencies": {
     "vue": "^3.0.0-rc.1",
