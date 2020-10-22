@@ -3,6 +3,7 @@
     <template #default>
         <SelectedAddress
             v-bind:job="job"
+            v-bind:class="{ inactive }"
             v-on:data="$emit('data', $event)"
             />
     </template>
@@ -17,10 +18,9 @@
 </template>
 
 <script>
-import { defineAsyncComponent } from 'vue';
 import shared from '../shared';
 
-const SelectedAddress = defineAsyncComponent(() => import('./SelectedAddress.vue'));
+import SelectedAddress from './SelectedAddress.vue';
 
 export default {
     name: 'SelectedAddressWrapper',

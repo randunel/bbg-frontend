@@ -17,10 +17,9 @@
 </template>
 
 <script>
-import { defineAsyncComponent } from 'vue';
 import shared from '../shared';
 
-const SelectedBroadbandPackage = defineAsyncComponent(() => import('./SelectedBroadbandPackage.vue'));
+import SelectedBroadbandPackage from './SelectedBroadbandPackage.vue';
 
 export default {
     name: 'SelectedBroadbandPackageWrapper',
