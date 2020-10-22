@@ -74,6 +74,20 @@
         v-on:data="onData($event)"
         />
     <hr v-if="job">
+    <BillingAddress
+        v-if="job"
+        v-bind:job="job"
+        v-bind:class="{ inactive: awaitingInputKey !== 'billingAddress' }"
+        v-on:data="onData($event)"
+        />
+    <hr v-if="job">
+    <ResidentialStatus
+        v-if="job"
+        v-bind:job="job"
+        v-bind:class="{ inactive: awaitingInputKey !== 'residentialStatus' }"
+        v-on:data="onData($event)"
+        />
+    <hr v-if="job">
 </template>
 
 <script>
@@ -86,6 +100,8 @@ import SelectedLandlineOptionWrapper from './components/SelectedLandlineOptionWr
 import SelectedLandlineExtrasWrapper from './components/SelectedLandlineExtrasWrapper.vue'
 import SelectedInstallationDateWrapper from './components/SelectedInstallationDateWrapper.vue'
 import Account from './components/Account.vue'
+import BillingAddress from './components/BillingAddress.vue'
+import ResidentialStatus from './components/ResidentialStatus.vue'
 
 export default {
     name: 'App',
@@ -99,6 +115,8 @@ export default {
         SelectedLandlineExtrasWrapper,
         SelectedInstallationDateWrapper,
         Account,
+        BillingAddress,
+        ResidentialStatus,
     },
     data() {
         return {
@@ -119,6 +137,8 @@ export default {
                 'selectedLandlineExtras',
                 'selectedInstallationDate',
                 'account',
+                'billingAddress',
+                'residentialStatus',
             ]) {
                 this.job.onAwaitingInput(inputKey, () => {
                     this.awaitingInputKey = inputKey;

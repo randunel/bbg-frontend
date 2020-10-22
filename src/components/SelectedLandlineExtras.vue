@@ -1,7 +1,7 @@
 <template>
     <form>
         <fieldset>
-            <label>Select your landline addon (or none)</label>
+            <label>Select your landline addon</label>
             <select v-model="selectedLandlineExtra">
                 <option value=''>None</option>
                 <option
