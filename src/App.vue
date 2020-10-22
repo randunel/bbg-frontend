@@ -5,7 +5,9 @@
     </div>
     <h3
         v-bind:class="{ inactive: job }"
-        >Server side prerequisites</h3>
+        >
+        Server side prerequisites
+    </h3>
     <AuthInstructions
         v-on:job-initialised="onJobInitialised"
         v-bind:class="{ inactive: job }"
@@ -19,6 +21,29 @@
     <Postcode
         v-if="job"
         v-bind:job="job"
+        v-bind:class="{ inactive: awaitingInputKey !== 'postcode' }"
+        v-on:data="onData($event)"
+        />
+    <hr v-if="job">
+    <SelectedAddressWrapper
+        v-if="job"
+        v-bind:job="job"
+        v-bind:inactive="awaitingInputKey !== 'selectedAddress'"
+        v-on:data="onData($event)"
+        />
+    <hr v-if="job">
+    <LandlineNumber
+        v-if="job"
+        v-bind:job="job"
+        v-bind:class="{ inactive: awaitingInputKey !== 'landlineNumber' }"
+        v-on:data="onData($event)"
+        />
+    <hr v-if="job">
+    <SelectedBroadbandPackageWrapper
+        v-if="job"
+        v-bind:job="job"
+        v-bind:inactive="awaitingInputKey !== 'selectedBroadbandPackage'"
+        v-on:data="onData($event)"
         />
     <hr v-if="job">
 </template>
@@ -26,27 +51,47 @@
 <script>
 import AuthInstructions from './components/AuthInstructions.vue'
 import Postcode from './components/Postcode.vue'
+import SelectedAddressWrapper from './components/SelectedAddressWrapper.vue'
+import LandlineNumber from './components/LandlineNumber.vue'
+import SelectedBroadbandPackageWrapper from './components/SelectedBroadbandPackageWrapper.vue'
 
 export default {
     name: 'App',
     components: {
+        AuthInstructions,
         Postcode,
-        AuthInstructions
+        SelectedAddressWrapper,
+        LandlineNumber,
+        SelectedBroadbandPackageWrapper,
     },
     data() {
         return {
             job: null,
-            awaitingInputKey: ''
+            awaitingInputKey: '',
+            awaitingInputResolve: null
         };
     },
     methods: {
         onJobInitialised(job) {
             this.job = job;
-            for (const inputKey of ['postcode', 'selectedAddress']) {
+            for (const inputKey of [
+                'postcode',
+                'selectedAddress',
+                'landlineNumber',
+                'selectedBroadbandPackage',
+            ]) {
                 this.job.onAwaitingInput(inputKey, () => {
                     this.awaitingInputKey = inputKey;
+                    return new Promise(resolve => {
+                        this.awaitingInputResolve = resolve;
+                    });
                 });
             }
+        },
+        onData(data) {
+            const resolve = this.awaitingInputResolve;
+            this.awaitingInputResolve = null;
+            resolve(data);
         }
     }
 }

@@ -1,8 +1,8 @@
 <template>
     <form>
         <fieldset>
-            <label>Enter your postcode</label>
-            <input v-model="postcode" placeholder="CB4 3DN"/>
+            <label>Enter your landline number (leave blank for none)</label>
+            <input v-model="landlineNumber" placeholder="00000000000"/>
             <button @click="submit">submit</button>
         </fieldset>
     </form>
@@ -17,13 +17,13 @@ export default {
     emits: [ 'data' ],
     data() {
         return {
-            postcode: ''
+            landlineNumber: ''
         };
     },
     methods: {
         async submit(event) {
             event.preventDefault();
-            this.$emit('data', this.postcode);
+            this.$emit('data', this.landlineNumber);
         }
     }
 }
