@@ -53,6 +53,20 @@
         v-on:data="onData($event)"
         />
     <hr v-if="job">
+    <SelectedLandlineExtrasWrapper
+        v-if="job"
+        v-bind:job="job"
+        v-bind:inactive="awaitingInputKey !== 'selectedLandlineExtras'"
+        v-on:data="onData($event)"
+        />
+    <hr v-if="job">
+    <SelectedInstallationDateWrapper
+        v-if="job"
+        v-bind:job="job"
+        v-bind:inactive="awaitingInputKey !== 'selectedInstallationDate'"
+        v-on:data="onData($event)"
+        />
+    <hr v-if="job">
 </template>
 
 <script>
@@ -62,6 +76,8 @@ import SelectedAddressWrapper from './components/SelectedAddressWrapper.vue'
 import LandlineNumber from './components/LandlineNumber.vue'
 import SelectedBroadbandPackageWrapper from './components/SelectedBroadbandPackageWrapper.vue'
 import SelectedLandlineOptionWrapper from './components/SelectedLandlineOptionWrapper.vue'
+import SelectedLandlineExtrasWrapper from './components/SelectedLandlineExtrasWrapper.vue'
+import SelectedInstallationDateWrapper from './components/SelectedInstallationDateWrapper.vue'
 
 export default {
     name: 'App',
@@ -72,6 +88,8 @@ export default {
         LandlineNumber,
         SelectedBroadbandPackageWrapper,
         SelectedLandlineOptionWrapper,
+        SelectedLandlineExtrasWrapper,
+        SelectedInstallationDateWrapper,
     },
     data() {
         return {
@@ -89,6 +107,8 @@ export default {
                 'landlineNumber',
                 'selectedBroadbandPackage',
                 'selectedLandlineOption',
+                'selectedLandlineExtras',
+                'selectedInstallationDate',
             ]) {
                 this.job.onAwaitingInput(inputKey, () => {
                     this.awaitingInputKey = inputKey;
