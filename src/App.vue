@@ -67,6 +67,13 @@
         v-on:data="onData($event)"
         />
     <hr v-if="job">
+    <Account
+        v-if="job"
+        v-bind:job="job"
+        v-bind:class="{ inactive: awaitingInputKey !== 'account' }"
+        v-on:data="onData($event)"
+        />
+    <hr v-if="job">
 </template>
 
 <script>
@@ -78,6 +85,7 @@ import SelectedBroadbandPackageWrapper from './components/SelectedBroadbandPacka
 import SelectedLandlineOptionWrapper from './components/SelectedLandlineOptionWrapper.vue'
 import SelectedLandlineExtrasWrapper from './components/SelectedLandlineExtrasWrapper.vue'
 import SelectedInstallationDateWrapper from './components/SelectedInstallationDateWrapper.vue'
+import Account from './components/Account.vue'
 
 export default {
     name: 'App',
@@ -90,6 +98,7 @@ export default {
         SelectedLandlineOptionWrapper,
         SelectedLandlineExtrasWrapper,
         SelectedInstallationDateWrapper,
+        Account,
     },
     data() {
         return {
@@ -109,6 +118,7 @@ export default {
                 'selectedLandlineOption',
                 'selectedLandlineExtras',
                 'selectedInstallationDate',
+                'account',
             ]) {
                 this.job.onAwaitingInput(inputKey, () => {
                     this.awaitingInputKey = inputKey;

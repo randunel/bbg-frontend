@@ -3,7 +3,7 @@
         <fieldset>
             <label>Select your landline addon (or none)</label>
             <select v-model="selectedLandlineExtra">
-                <option>None</option>
+                <option value=''>None</option>
                 <option
                     v-for="extra in availableLandlineExtras"
                     v-bind:value="extra"
