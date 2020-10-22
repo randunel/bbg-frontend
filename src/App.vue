@@ -46,6 +46,13 @@
         v-on:data="onData($event)"
         />
     <hr v-if="job">
+    <SelectedLandlineOptionWrapper
+        v-if="job"
+        v-bind:job="job"
+        v-bind:inactive="awaitingInputKey !== 'selectedLandlineOption'"
+        v-on:data="onData($event)"
+        />
+    <hr v-if="job">
 </template>
 
 <script>
@@ -54,6 +61,7 @@ import Postcode from './components/Postcode.vue'
 import SelectedAddressWrapper from './components/SelectedAddressWrapper.vue'
 import LandlineNumber from './components/LandlineNumber.vue'
 import SelectedBroadbandPackageWrapper from './components/SelectedBroadbandPackageWrapper.vue'
+import SelectedLandlineOptionWrapper from './components/SelectedLandlineOptionWrapper.vue'
 
 export default {
     name: 'App',
@@ -63,6 +71,7 @@ export default {
         SelectedAddressWrapper,
         LandlineNumber,
         SelectedBroadbandPackageWrapper,
+        SelectedLandlineOptionWrapper,
     },
     data() {
         return {
@@ -79,6 +88,7 @@ export default {
                 'selectedAddress',
                 'landlineNumber',
                 'selectedBroadbandPackage',
+                'selectedLandlineOption',
             ]) {
                 this.job.onAwaitingInput(inputKey, () => {
                     this.awaitingInputKey = inputKey;
@@ -89,6 +99,7 @@ export default {
             }
         },
         onData(data) {
+            this.awaitingInputKey = '';
             const resolve = this.awaitingInputResolve;
             this.awaitingInputResolve = null;
             resolve(data);

@@ -1,7 +1,7 @@
 <template>
     <Suspense>
     <template #default>
-        <SelectedAddress
+        <SelectedLandlineOption
             v-bind:job="job"
             v-bind:class="{ inactive }"
             v-on:data="$emit('data', $event)"
@@ -11,21 +11,21 @@
         <p
             v-bind:class="{ inactive }"
             >
-            Retrieving availableAddresses, please wait
+            Retrieving availableLandlineOptions, please wait
         </p>
     </template>
     </Suspense>
 </template>
 
 <script>
-import SelectedAddress from './SelectedAddress.vue';
+import SelectedLandlineOption from './SelectedLandlineOption.vue';
 
 export default {
-    name: 'SelectedAddressWrapper',
+    name: 'SelectedLandlineOptionWrapper',
     props: [ 'job', 'inactive' ],
     emits: [ 'data' ],
     components: {
-        SelectedAddress
+        SelectedLandlineOption
     }
 }
 </script>

@@ -20,7 +20,7 @@ import shared from '../shared';
 
 export default {
     name: 'SelectedAddress',
-    props: [ 'job', 'inactive' ],
+    props: [ 'job' ],
     emits: [ 'data' ],
     async setup(props) {
         const [ availableAddresses ] = await props.job.waitForOutputs('availableAddresses');

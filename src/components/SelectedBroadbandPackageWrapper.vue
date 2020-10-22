@@ -3,6 +3,7 @@
     <template #default>
         <SelectedBroadbandPackage
             v-bind:job="job"
+            v-bind:class="{ inactive }"
             v-on:data="$emit('data', $event)"
             />
     </template>
@@ -17,8 +18,6 @@
 </template>
 
 <script>
-import shared from '../shared';
-
 import SelectedBroadbandPackage from './SelectedBroadbandPackage.vue';
 
 export default {
